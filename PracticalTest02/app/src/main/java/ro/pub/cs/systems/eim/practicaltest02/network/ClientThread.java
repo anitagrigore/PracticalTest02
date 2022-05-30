@@ -43,6 +43,15 @@ public class ClientThread extends Thread {
             }
             printWriter.println(word);
             printWriter.flush();
+            String res = bufferedReader.readLine();
+            Log.d("Client ", "Received data: " + res);
+
+            responseTextView.post(new Runnable() {
+                @Override
+                public void run() {
+                    responseTextView.setText(res);
+                }
+            });
         } catch (IOException ioException) {
             Log.e(Constants.TAG, "[CLIENT THREAD] An exception has occurred: " + ioException.getMessage());
             if (Constants.DEBUG) {
